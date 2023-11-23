@@ -2,6 +2,10 @@
 
 
 #include "ShooterCharacterClass.h"
+#include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "Components/InputComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AShooterCharacterClass::AShooterCharacterClass()
@@ -18,6 +22,30 @@ void AShooterCharacterClass::BeginPlay()
 	
 }
 
+void AShooterCharacterClass::Move(const FInputActionValue &Value)
+{
+    FVector2D CurrentValue = Value.Get<FVector2D>();
+    FVector Offset3D(CurrentValue.X, CurrentValue.Y, 0.0f);
+    float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
+    FVector DeltaLocation = Offset3D * Speed * DeltaTime;
+    bool DoesSweep = true;
+    AddActorLocalOffset(DeltaLocation, DoesSweep);
+    
+    // FRotator DeltaRotation = FRotator::ZeroRotator;
+    // DeltaRotation.Yaw = CurrentValue.Y * TurnRate * DeltaTime;  
+    // AddActorLocalRotation(DeltaRotation, DoesSweep);
+}
+
+void AShooterCharacterClass::Fire(const FInputActionValue &Value)
+{
+    UE_LOG(LogTemp, Display, TEXT("Fire"));
+}
+
+void AShooterCharacterClass::MouseTilt(const FInputActionValue &Value)
+{
+    UE_LOG(LogTemp, Display, TEXT("Mouse tilt"));
+}
+
 // Called every frame
 void AShooterCharacterClass::Tick(float DeltaTime)
 {
@@ -25,10 +53,34 @@ void AShooterCharacterClass::Tick(float DeltaTime)
 
 }
 
-// Called to bind functionality to input
-void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+APlayerController* AShooterCharacterClass::GetPlayerController()
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
+    APlayerController* PlayerController = Cast<APlayerController>(Controller);
+    return PlayerController;
 }
 
+void AShooterCharacterClass::SetupMappingContext()
+{
+    if(GetPlayerController())
+    {
+        UEnhancedInputLocalPlayerSubsystem* Subsystem = 
+                    ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetPlayerController()->GetLocalPlayer());
+        if(Subsystem)
+        {
+            Subsystem->AddMappingContext(MainMappingContext, 0);
+        }
+    }
+}
+
+void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	SetupMappingContext();
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if(UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
+    {
+        EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Move);
+        EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Fire);
+        EnhancedInputComponent->BindAction(MouseTiltAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTilt);
+    }
+}
