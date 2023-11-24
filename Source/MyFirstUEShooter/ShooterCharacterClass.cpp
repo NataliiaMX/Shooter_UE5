@@ -1,4 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "ShooterCharacterClass.h"
@@ -7,33 +6,31 @@
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
+
 AShooterCharacterClass::AShooterCharacterClass()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 }
 
-// Called when the game starts or when spawned
 void AShooterCharacterClass::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
+void AShooterCharacterClass::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+}
+
 void AShooterCharacterClass::Move(const FInputActionValue &Value)
 {
-    FVector2D CurrentValue = Value.Get<FVector2D>();
-    FVector Offset3D(CurrentValue.X, CurrentValue.Y, 0.0f);
-    float DeltaTime = UGameplayStatics::GetWorldDeltaSeconds(this);
-    FVector DeltaLocation = Offset3D * Speed * DeltaTime;
-    bool DoesSweep = true;
-    AddActorLocalOffset(DeltaLocation, DoesSweep);
-    
-    // FRotator DeltaRotation = FRotator::ZeroRotator;
-    // DeltaRotation.Yaw = CurrentValue.Y * TurnRate * DeltaTime;  
-    // AddActorLocalRotation(DeltaRotation, DoesSweep);
+    FVector CurrentValue;
+    CurrentValue = Value.Get<FVector>();
+    AddMovementInput(GetActorForwardVector() * CurrentValue);
+    AddMovementInput(GetActorRightVector() * CurrentValue);
 }
 
 void AShooterCharacterClass::Fire(const FInputActionValue &Value)
@@ -41,18 +38,19 @@ void AShooterCharacterClass::Fire(const FInputActionValue &Value)
     UE_LOG(LogTemp, Display, TEXT("Fire"));
 }
 
-void AShooterCharacterClass::MouseTilt(const FInputActionValue &Value)
+void AShooterCharacterClass::MouseTiltRight(const FInputActionValue &Value)
 {
-    UE_LOG(LogTemp, Display, TEXT("Mouse tilt"));
+    float ValueToFloat = Value.GetMagnitude();
+    AddControllerYawInput(ValueToFloat);
 }
 
-// Called every frame
-void AShooterCharacterClass::Tick(float DeltaTime)
+void AShooterCharacterClass::MouseTiltUp(const FInputActionValue &Value)
 {
-	Super::Tick(DeltaTime);
-
+    float ValueToFloat = Value.GetMagnitude();
+    AddControllerPitchInput(-ValueToFloat);
 }
 
+//input management
 APlayerController* AShooterCharacterClass::GetPlayerController()
 {
     APlayerController* PlayerController = Cast<APlayerController>(Controller);
@@ -80,7 +78,9 @@ void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerIn
 	if(UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
     {
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Move);
+        EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Fire);
-        EnhancedInputComponent->BindAction(MouseTiltAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTilt);
+        EnhancedInputComponent->BindAction(MouseTiltRightAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTiltRight);
+        EnhancedInputComponent->BindAction(MouseTiltUpAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTiltUp);
     }
 }

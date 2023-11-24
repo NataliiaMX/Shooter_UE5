@@ -24,16 +24,24 @@ protected:
 	class UInputAction* MoveAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* JumpAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputAction* FireAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
-	class UInputAction* MouseTiltAction;
+	class UInputAction* MouseTiltRightAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* MouseTiltUpAction;
 
 	void Move(const FInputActionValue& Value);
 
 	void Fire(const FInputActionValue& Value);
 
-	void MouseTilt(const FInputActionValue& Value);
+	void MouseTiltRight(const FInputActionValue& Value);
+
+	void MouseTiltUp(const FInputActionValue& Value);
 
 public:	
 	virtual void Tick(float DeltaTime) override;
