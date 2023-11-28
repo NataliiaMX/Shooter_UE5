@@ -5,12 +5,19 @@
 #include "EnhancedInputComponent.h"
 #include "Components/InputComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 
 AShooterCharacterClass::AShooterCharacterClass()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
+    SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Spring Arm"));
+    SpringArm->SetupAttachment(RootComponent);
+
+    Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+    Camera->SetupAttachment(SpringArm);
 }
 
 void AShooterCharacterClass::BeginPlay()
@@ -25,12 +32,19 @@ void AShooterCharacterClass::Tick(float DeltaTime)
 
 }
 
-void AShooterCharacterClass::Move(const FInputActionValue &Value)
+void AShooterCharacterClass::MoveForward(const FInputActionValue &Value)
 {
     FVector CurrentValue;
     CurrentValue = Value.Get<FVector>();
-    AddMovementInput(GetActorForwardVector() * CurrentValue);
-    AddMovementInput(GetActorRightVector() * CurrentValue);
+    AddMovementInput(GetActorForwardVector() * CurrentValue.X * Speed);
+    
+}
+
+void AShooterCharacterClass::MoveRight(const FInputActionValue &Value)
+{
+    FVector CurrentValue;
+    CurrentValue = Value.Get<FVector>();
+    AddMovementInput(GetActorRightVector() * CurrentValue.Y * Speed);
 }
 
 void AShooterCharacterClass::Fire(const FInputActionValue &Value)
@@ -48,6 +62,18 @@ void AShooterCharacterClass::MouseTiltUp(const FInputActionValue &Value)
 {
     float ValueToFloat = Value.GetMagnitude();
     AddControllerPitchInput(-ValueToFloat);
+}
+
+void AShooterCharacterClass::LookUpRate(const FInputActionValue &Value)
+{
+    float ValueToFloat = Value.GetMagnitude();
+    AddControllerPitchInput(ValueToFloat * RotationRate * GetWorld()->GetDeltaSeconds());
+}
+
+void AShooterCharacterClass::LookRightRate(const FInputActionValue &Value)
+{
+    float ValueToFloat = Value.GetMagnitude();
+    AddControllerYawInput(ValueToFloat * RotationRate * GetWorld()->GetDeltaSeconds());
 }
 
 //input management
@@ -77,10 +103,13 @@ void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerIn
 
 	if(UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent))
     {
-        EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Move);
+        EnhancedInputComponent->BindAction(MoveForwardAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MoveForward);
+        EnhancedInputComponent->BindAction(MoveRightAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MoveRight);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::Fire);
         EnhancedInputComponent->BindAction(MouseTiltRightAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTiltRight);
         EnhancedInputComponent->BindAction(MouseTiltUpAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::MouseTiltUp);
-    }
+        EnhancedInputComponent->BindAction(LookUpRateAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::LookUpRate);
+        EnhancedInputComponent->BindAction(LookRightRateAction, ETriggerEvent::Triggered, this, &AShooterCharacterClass::LookRightRate);
+    } 
 }

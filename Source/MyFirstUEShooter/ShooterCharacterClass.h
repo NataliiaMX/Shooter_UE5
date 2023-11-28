@@ -21,7 +21,10 @@ protected:
 	class UInputMappingContext* MainMappingContext;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
-	class UInputAction* MoveAction;
+	class UInputAction* MoveForwardAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* MoveRightAction;
 
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputAction* JumpAction;
@@ -35,13 +38,25 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	class UInputAction* MouseTiltUpAction;
 
-	void Move(const FInputActionValue& Value);
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* LookUpRateAction;
+
+	UPROPERTY(EditAnywhere, Category = "Input")
+	class UInputAction* LookRightRateAction;
+
+	void MoveForward(const FInputActionValue& Value);
+
+	void MoveRight(const FInputActionValue& Value);
 
 	void Fire(const FInputActionValue& Value);
 
 	void MouseTiltRight(const FInputActionValue& Value);
 
 	void MouseTiltUp(const FInputActionValue& Value);
+
+	void LookUpRate(const FInputActionValue& Value);
+
+	void LookRightRate(const FInputActionValue& Value);
 
 public:	
 	virtual void Tick(float DeltaTime) override;
@@ -53,9 +68,15 @@ public:
 	void SetupMappingContext();
 
 private:
+	UPROPERTY(EditAnywhere, Category = "Components")
+	class USpringArmComponent* SpringArm;
+		
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UCameraComponent* Camera;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float Speed = 200.f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float TurnRate = 100.f;	
+	float RotationRate = 10.f;	
 };
