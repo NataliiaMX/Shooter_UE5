@@ -14,6 +14,14 @@ class MYFIRSTUESHOOTER_API AShooterCharacterClass : public ACharacter
 public:
 	AShooterCharacterClass();
 
+	virtual void Tick(float DeltaTime) override;
+
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	APlayerController* GetPlayerController();
+
+	void SetupMappingContext();
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -57,15 +65,6 @@ protected:
 	void LookUpRate(const FInputActionValue& Value);
 
 	void LookRightRate(const FInputActionValue& Value);
-
-public:	
-	virtual void Tick(float DeltaTime) override;
-
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	APlayerController* GetPlayerController();
-
-	void SetupMappingContext();
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Components")
