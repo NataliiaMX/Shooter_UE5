@@ -1,5 +1,21 @@
 [
 	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\Gun.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\Gun.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\MyFirstUEShooter.Build.cs",
 		"arguments": [
 			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",

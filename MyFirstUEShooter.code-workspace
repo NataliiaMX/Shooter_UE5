@@ -10,8 +10,7 @@
 		}
 	],
 	"settings": {
-		"typescript.tsc.autoDetect": "off",
-		"dotnet.defaultSolution": "UE5/Engine/Source/Runtime/SymsLib/SymsLib.sln"
+		"typescript.tsc.autoDetect": "off"
 	},
 	"extensions": {
 		"recommendations": [

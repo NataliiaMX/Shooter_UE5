@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Gun.h"
 
 
 AShooterCharacterClass::AShooterCharacterClass()
@@ -24,6 +25,12 @@ void AShooterCharacterClass::BeginPlay()
 {
 	Super::BeginPlay();
 	
+    GetMesh()->HideBoneByName(TEXT("weapon_l"), EPhysBodyOp::PBO_None);
+    GetMesh()->HideBoneByName(TEXT("weapon_r"), EPhysBodyOp::PBO_None);
+
+    Gun = GetWorld()->SpawnActor<AGun>(GunClass);
+    Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
+    Gun->SetOwner(this);
 }
 
 void AShooterCharacterClass::Tick(float DeltaTime)

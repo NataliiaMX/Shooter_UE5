@@ -6,6 +6,8 @@
 #include "InputActionValue.h"
 #include "ShooterCharacterClass.generated.h"
 
+class AGun;
+
 UCLASS()
 class MYFIRSTUESHOOTER_API AShooterCharacterClass : public ACharacter
 {
@@ -78,4 +80,10 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float RotationRate = 10.f;	
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AGun> GunClass;
+
+	UPROPERTY()
+	AGun* Gun;
 };
