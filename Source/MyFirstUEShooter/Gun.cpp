@@ -26,3 +26,7 @@ void AGun::Tick(float DeltaTime)
 
 }
 
+void AGun::Shoot()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Shoot"));
+}

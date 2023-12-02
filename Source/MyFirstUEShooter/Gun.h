@@ -21,11 +21,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	void Shoot();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	class USceneComponent* GunRootComponent;
 
 	UPROPERTY(VisibleAnywhere)
 	class USkeletalMeshComponent* MeshComponent;
-
 };

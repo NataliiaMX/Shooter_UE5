@@ -56,7 +56,7 @@ void AShooterCharacterClass::MoveRight(const FInputActionValue &Value)
 
 void AShooterCharacterClass::Fire(const FInputActionValue &Value)
 {
-    UE_LOG(LogTemp, Display, TEXT("Fire"));
+    Gun->Shoot();
 }
 
 void AShooterCharacterClass::MouseTiltRight(const FInputActionValue &Value)
