@@ -2,6 +2,8 @@
 
 #include "Gun.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "DrawDebugHelpers.h"
  
 AGun::AGun()
 {
@@ -28,5 +30,28 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::Shoot()
 {
-	UE_LOG(LogTemp, Warning, TEXT("Shoot"));
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlashVFX, MeshComponent, TEXT("MuzzleFlashSocket"));
+
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if(OwnerPawn)
+	{
+		AController* OwnerController = OwnerPawn->GetController();
+		if(OwnerController)
+		{
+			FVector ViewPointLocation;
+			FRotator ViewPointRotation;
+			OwnerController->GetPlayerViewPoint(ViewPointLocation, ViewPointRotation);
+			
+			FVector ViewPointEnd = ViewPointLocation + ViewPointRotation.Vector() * MaxRange;
+
+			
+			FHitResult HitResult;
+			bool bLineTracing = GetWorld()->LineTraceSingleByChannel(HitResult, ViewPointLocation, ViewPointEnd, ECollisionChannel::ECC_GameTraceChannel1);
+			if(bLineTracing)
+			{
+				FVector ShotDirection = -ViewPointRotation.Vector();
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitVFX, HitResult.Location, ShotDirection.Rotation(), true);
+			}
+		}
+	}
 }

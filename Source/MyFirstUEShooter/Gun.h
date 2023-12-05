@@ -29,4 +29,15 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	class USkeletalMeshComponent* MeshComponent;
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* MuzzleFlashVFX;
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* HitVFX;
+
+	UPROPERTY(EditAnywhere)
+	float MaxRange = 1000.f;
+
+
 };
