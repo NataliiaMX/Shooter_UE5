@@ -4,6 +4,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "Engine/DamageEvents.h"
  
 AGun::AGun()
 {
@@ -51,6 +52,14 @@ void AGun::Shoot()
 			{
 				FVector ShotDirection = -ViewPointRotation.Vector();
 				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitVFX, HitResult.Location, ShotDirection.Rotation(), true);
+
+				
+				AActor* HitedActor = HitResult.GetActor();
+				if(HitedActor)
+				{
+					FPointDamageEvent DamageEvent(Damage, HitResult, ShotDirection, nullptr);
+					HitedActor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+				}
 			}
 		}
 	}

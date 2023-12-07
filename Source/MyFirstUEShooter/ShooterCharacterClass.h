@@ -24,6 +24,11 @@ public:
 
 	void SetupMappingContext();
 
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
+
+	UFUNCTION(BlueprintPure)
+	bool IsDead() const;
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -86,4 +91,10 @@ private:
 
 	UPROPERTY()
 	AGun* Gun;
+
+	UPROPERTY(EditDefaultsOnly)
+	float MaxHealth = 50.f;
+
+	UPROPERTY(VisibleAnywhere)
+	float CurrentHealth;
 };

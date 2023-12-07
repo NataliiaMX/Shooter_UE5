@@ -31,6 +31,8 @@ void AShooterCharacterClass::BeginPlay()
     Gun = GetWorld()->SpawnActor<AGun>(GunClass);
     Gun->AttachToComponent(GetMesh(), FAttachmentTransformRules::KeepRelativeTransform, TEXT("WeaponSocket"));
     Gun->SetOwner(this);
+
+    CurrentHealth = MaxHealth;
 }
 
 void AShooterCharacterClass::Tick(float DeltaTime)
@@ -101,6 +103,22 @@ void AShooterCharacterClass::SetupMappingContext()
             Subsystem->AddMappingContext(MainMappingContext, 0);
         }
     }
+}
+
+float AShooterCharacterClass::TakeDamage(float DamageAmount, FDamageEvent const &DamageEvent, AController *EventInstigator, AActor *DamageCauser)
+{
+    float DamageApplied = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+    
+    DamageAmount = FMath::Min(DamageAmount, CurrentHealth);
+    CurrentHealth -= DamageAmount;
+    UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
+
+    return DamageApplied;
+}
+
+bool AShooterCharacterClass::IsDead() const
+{
+    return CurrentHealth <= 0;
 }
 
 void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
