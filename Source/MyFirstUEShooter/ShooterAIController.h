@@ -6,9 +6,9 @@
 #include "AIController.h"
 #include "ShooterAIController.generated.h"
 
-/**
- * 
- */
+class UBehaviorTree;
+
+
 UCLASS()
 class MYFIRSTUESHOOTER_API AShooterAIController : public AAIController
 {
@@ -21,7 +21,9 @@ class MYFIRSTUESHOOTER_API AShooterAIController : public AAIController
 
 	private:
 		UPROPERTY(EditAnywhere)
-		float AggroRadius = 50.f;
+		UBehaviorTree* AIBehavior;
 
 		void FollowPlayer();
+
+		void SetupBehaviorTree();
 };

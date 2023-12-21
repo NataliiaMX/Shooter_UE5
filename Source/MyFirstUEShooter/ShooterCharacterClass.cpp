@@ -8,6 +8,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Gun.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 
 AShooterCharacterClass::AShooterCharacterClass()
@@ -45,7 +46,12 @@ void AShooterCharacterClass::MoveForward(const FInputActionValue &Value)
 {
     FVector CurrentValue;
     CurrentValue = Value.Get<FVector>();
-    AddMovementInput(GetActorForwardVector() * CurrentValue.X * Speed);
+    UCharacterMovementComponent* MyCharacterMovement = GetCharacterMovement();
+    if (MyCharacterMovement)
+    {
+        MyCharacterMovement->MaxWalkSpeed = CurrentValue.X * Speed;
+    }
+    AddMovementInput(GetActorForwardVector() * CurrentValue.X);
     
 }
 
