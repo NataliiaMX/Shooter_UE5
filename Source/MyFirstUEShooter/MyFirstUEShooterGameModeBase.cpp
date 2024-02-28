@@ -3,3 +3,6 @@
 
 #include "MyFirstUEShooterGameModeBase.h"
 
+void AMyFirstUEShooterGameModeBase::PawnKilled(APawn *PawnKilled)
+{
+}

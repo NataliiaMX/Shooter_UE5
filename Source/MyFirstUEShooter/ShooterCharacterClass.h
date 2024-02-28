@@ -29,6 +29,11 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsDead() const;
 
+	UFUNCTION(BlueprintPure)
+	float GetHealthPercent() const;
+
+	void Fire(const FInputActionValue& Value);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -63,8 +68,6 @@ protected:
 
 	void MoveRight(const FInputActionValue& Value);
 
-	void Fire(const FInputActionValue& Value);
-
 	void MouseTiltRight(const FInputActionValue& Value);
 
 	void MouseTiltUp(const FInputActionValue& Value);
@@ -80,9 +83,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class UCameraComponent* Camera;
 	
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
-	float Speed = 800.f;
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 	float RotationRate = 10.f;	
 

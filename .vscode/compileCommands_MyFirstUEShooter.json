@@ -1,5 +1,69 @@
 [
 	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTService_PlayerLocation.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTService_PlayerLocation.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTService_PlayerLocationIfSeen.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTService_PlayerLocationIfSeen.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTTaskNode_Shoot.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTTaskNode_Shoot.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTTask_ClearBlackboardValue.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\BTTask_ClearBlackboardValue.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
 		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\Gun.cpp",
 		"arguments": [
 			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
@@ -9,6 +73,22 @@
 	},
 	{
 		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\Gun.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\KillThemAllGameMode.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\KillThemAllGameMode.h",
 		"arguments": [
 			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
@@ -81,6 +161,22 @@
 	},
 	{
 		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\ShooterCharacterClass.h",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\ShooterPlayerController.cpp",
+		"arguments": [
+			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"
+		],
+		"directory": "D:\\UnrealEngine\\UE_5.2\\Engine\\Source"
+	},
+	{
+		"file": "D:\\UnrealProjects\\MyFirstUEShooter\\Source\\MyFirstUEShooter\\ShooterPlayerController.h",
 		"arguments": [
 			"D:\\VisualStudio\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\UnrealProjects\\MyFirstUEShooter\\.vscode\\compileCommands_MyFirstUEShooter\\MyFirstUEShooter.261.rsp"

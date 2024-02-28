@@ -4,12 +4,13 @@
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Gun.h"
 #include "GameFramework/CharacterMovementComponent.h"
-
+#include "MyFirstUEShooterGameModeBase.h"
 
 AShooterCharacterClass::AShooterCharacterClass()
 {
@@ -46,11 +47,7 @@ void AShooterCharacterClass::MoveForward(const FInputActionValue &Value)
 {
     FVector CurrentValue;
     CurrentValue = Value.Get<FVector>();
-    UCharacterMovementComponent* MyCharacterMovement = GetCharacterMovement();
-    if (MyCharacterMovement)
-    {
-        MyCharacterMovement->MaxWalkSpeed = CurrentValue.X * Speed;
-    }
+    
     AddMovementInput(GetActorForwardVector() * CurrentValue.X);
     
 }
@@ -59,7 +56,7 @@ void AShooterCharacterClass::MoveRight(const FInputActionValue &Value)
 {
     FVector CurrentValue;
     CurrentValue = Value.Get<FVector>();
-    AddMovementInput(GetActorRightVector() * CurrentValue.Y * Speed);
+    AddMovementInput(GetActorRightVector() * CurrentValue.Y);
 }
 
 void AShooterCharacterClass::Fire(const FInputActionValue &Value)
@@ -119,12 +116,27 @@ float AShooterCharacterClass::TakeDamage(float DamageAmount, FDamageEvent const 
     CurrentHealth -= DamageAmount;
     UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), CurrentHealth);
 
+    if (IsDead())
+    {
+        AMyFirstUEShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AMyFirstUEShooterGameModeBase>();
+        if (GameMode != nullptr)
+        {
+            GameMode->PawnKilled(this);
+        }
+        DetachFromControllerPendingDestroy();
+        GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+    }
     return DamageApplied;
 }
 
 bool AShooterCharacterClass::IsDead() const
 {
     return CurrentHealth <= 0;
+}
+
+float AShooterCharacterClass::GetHealthPercent() const
+{
+    return CurrentHealth / MaxHealth;
 }
 
 void AShooterCharacterClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
